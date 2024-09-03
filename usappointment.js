@@ -377,6 +377,7 @@ const MAX_DATE_PICKER_LOOKUP = 12 * 4;
           break;
         }
       } catch (err){
+        log("Failed with error: " + err)
         // Swallow the error and keep running in case we encountered an error.
       } finally {
         close(browser)
