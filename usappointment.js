@@ -188,7 +188,7 @@ const MAX_DATE_PICKER_LOOKUP = 12 * 4;
       {
           const targetPage = page;
           const element = await waitForSelectors([["aria/Password"],["#user_password"]], targetPage, { timeout, visible: true });
-		  await scrollIntoViewIfNeeded(element, timeout);
+          await scrollIntoViewIfNeeded(element, timeout);
           const type = await element.evaluate(el => el.type);
           if (["textarea","select-one","text","url","tel","search","password","number","email"].includes(type)) {
             await element.type(passwordInput);
@@ -217,12 +217,12 @@ const MAX_DATE_PICKER_LOOKUP = 12 * 4;
           await scrollIntoViewIfNeeded(element, timeout);
           await element.click({ offset: { x: 34, y: 11.34375} });
           await targetPage.waitForNavigation();
+        }
       }
-
       // We are logged in now. Check available dates from the API
       {
           const targetPage = page;
-	  await targetPage.setExtraHTTPHeaders({'Accept': 'application/json, text/javascript, */*; q=0.01', 'X-Requested-With': 'XMLHttpRequest'});
+          await targetPage.setExtraHTTPHeaders({'Accept': 'application/json, text/javascript, */*; q=0.01', 'X-Requested-With': 'XMLHttpRequest'});
           const response = await targetPage.goto('https://ais.usvisa-info.com/en-' + region + '/niv/schedule/' + appointmentId + '/appointment/days/' + consularId + '.json?appointments[expedite]=false');
 
           const availableDates = JSON.parse(await response.text());
