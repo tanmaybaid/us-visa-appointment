@@ -47,4 +47,4 @@ Open command line or terminal window and navigate to the folder usappointment.js
 
 ## Tips
 
-Comment line 100 and uncomment line 102 in usappointment.js to see puppeteer in action
+Use CLI arg `-v` to see puppeteer in action.

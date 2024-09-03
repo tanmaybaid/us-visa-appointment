@@ -5,7 +5,7 @@ const axios = require('axios');
 const MAX_DATE_PICKER_LOOKUP = 12 * 4;
 (async () => {
     //#region Command line args
-    const args = parseArgs(process.argv.slice(2), {string: ['d', 'u', 'p', 'a', 't', 'c', 'n', 'r', 'w'], boolean: ['g']})
+    const args = parseArgs(process.argv.slice(2), {string: ['d', 'u', 'p', 'a', 't', 'c', 'n', 'r', 'w'], boolean: ['g', 'v']})
     const currentDate = new Date(args.d);
     const usernameInput = args.u;
     const passwordInput = args.p;
@@ -16,6 +16,7 @@ const MAX_DATE_PICKER_LOOKUP = 12 * 4;
     const region = args.r;
     const webhook = args.w;
     const groupAppointment = args.g;
+    const headless = !args.v;
     //#endregion
 	
     //#region Helper functions
@@ -137,7 +138,7 @@ const MAX_DATE_PICKER_LOOKUP = 12 * 4;
     async function runLogic(browser) {
       const page = await browser.newPage();
       const timeout = 5000;
-      const navigationTimeout = 60000;
+      const navigationTimeout = 5000;
       const smallTimeout = 100;
       const loginUrl = 'https://ais.usvisa-info.com/en-' + region + '/niv/users/sign_in'
       page.setDefaultTimeout(timeout);
@@ -387,8 +388,7 @@ const MAX_DATE_PICKER_LOOKUP = 12 * 4;
     }
 
     while (true){
-      // Change value of headless to "false" to see puppeteer in action
-      const browser = await puppeteer.launch({ headless: true });
+      const browser = await puppeteer.launch({ headless: headless });
 
       try{
         const result = await runLogic(browser);
