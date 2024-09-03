@@ -5,12 +5,13 @@ const axios = require('axios');
 const MAX_DATE_PICKER_LOOKUP = 12 * 4;
 (async () => {
     //#region Command line args
-    const args = parseArgs(process.argv.slice(2), {string: ['d', 'u', 'p', 'a', 't', 'c', 'n', 'r', 'w'], boolean: ['g', 'v']})
+    const args = parseArgs(process.argv.slice(2), {string: ['d', 'u', 'p', 'a', 't', 'o', 'c', 'n', 'r', 'w'], boolean: ['g', 'v']})
     const currentDate = new Date(args.d);
     const usernameInput = args.u;
     const passwordInput = args.p;
     const appointmentId = args.a;
     const retryTimeout = args.t * 1000;
+    const navigationTimeout = (args.o || 30) * 1000;
     const consularId = args.c;
     const userToken = args.n;
     const region = args.r;
@@ -138,7 +139,6 @@ const MAX_DATE_PICKER_LOOKUP = 12 * 4;
     async function runLogic(browser) {
       const page = await browser.newPage();
       const timeout = 5000;
-      const navigationTimeout = 5000;
       const smallTimeout = 100;
       const loginUrl = 'https://ais.usvisa-info.com/en-' + region + '/niv/users/sign_in'
       page.setDefaultTimeout(timeout);
