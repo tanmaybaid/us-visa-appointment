@@ -41,9 +41,15 @@ Open command line or terminal window and navigate to the folder usappointment.js
 
 **-t** Retry timeout in seconds. Keep this above 120 seconds to make sure you are not getting temporarily banned from receiving available dates
 
+**-o** Navigation timeout in seconds. Keep this above 4 seconds to make sure you are waiting for enough time for page to load/navigate.
+
 **-n** Pushover User Key from Pushover Notifications app. Do not provide this argument if you don't want to receive notifications.
 
+**-w** Webhook URL from Chime, Slack or other apps that support webhooks. Do not provide this argument if you don't want to receive webhook notifications.
+
 **-g** Use this argument without any value if your application consists more than one person
+
+**-v** Use this argument without any value to see puppeteer in action i.e. script execution on chrome window.
 
 ## Tips
 
