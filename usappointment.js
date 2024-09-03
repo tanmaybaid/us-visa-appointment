@@ -5,7 +5,7 @@ const axios = require('axios');
 const MAX_DATE_PICKER_LOOKUP = 12 * 4;
 (async () => {
     //#region Command line args
-    const args = parseArgs(process.argv.slice(2), {string: ['u', 'p', 'c', 'a', 'n', 'd', 'r', 'w'], boolean: ['g']})
+    const args = parseArgs(process.argv.slice(2), {string: ['d', 'u', 'p', 'a', 't', 'c', 'n', 'r', 'w'], boolean: ['g']})
     const currentDate = new Date(args.d);
     const usernameInput = args.u;
     const passwordInput = args.p;
@@ -13,9 +13,9 @@ const MAX_DATE_PICKER_LOOKUP = 12 * 4;
     const retryTimeout = args.t * 1000;
     const consularId = args.c;
     const userToken = args.n;
-    const groupAppointment = args.g;
     const region = args.r;
     const webhook = args.w;
+    const groupAppointment = args.g;
     //#endregion
 	
     //#region Helper functions
