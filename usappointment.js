@@ -94,7 +94,7 @@ const MAX_DATE_PICKER_LOOKUP = 12 * 4;
         if (result) {
           return;
         }
-        await new Promise(resolve => setTimeout(resolve, 100));
+        await sleep(100);
       }
       throw new Error('Timed out');
     }
