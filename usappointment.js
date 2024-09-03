@@ -132,6 +132,7 @@ const MAX_DATE_PICKER_LOOKUP = 12 * 4;
       const timeout = 5000;
       const navigationTimeout = 60000;
       const smallTimeout = 100;
+      const loginUrl = 'https://ais.usvisa-info.com/en-' + region + '/niv/users/sign_in'
       page.setDefaultTimeout(timeout);
       page.setDefaultNavigationTimeout(navigationTimeout);
 
@@ -145,7 +146,7 @@ const MAX_DATE_PICKER_LOOKUP = 12 * 4;
       // Go to login page
       {
           const targetPage = page;
-          await targetPage.goto('https://ais.usvisa-info.com/en-' + region + '/niv/users/sign_in', { waitUntil: 'domcontentloaded' });
+          await targetPage.goto(loginUrl, { waitUntil: 'domcontentloaded' });
       }
 
       // Click on username input
@@ -216,7 +217,20 @@ const MAX_DATE_PICKER_LOOKUP = 12 * 4;
           const element = await waitForSelectors([["aria/Sign In[role=\"button\"]"],["#new_user > p:nth-child(9) > input"]], targetPage, { timeout, visible: true });
           await scrollIntoViewIfNeeded(element, timeout);
           await element.click({ offset: { x: 34, y: 11.34375} });
-          await targetPage.waitForNavigation();
+          try {
+            await targetPage.waitForNavigation();
+          } catch (err) {
+            // Verify if we successfully logged in
+            const currentPageUrl = await targetPage.evaluate(() => document.location.href);
+            if (currentPageUrl === loginUrl) {
+              log("Unable to login, failed with " + err);
+              const element = await waitForSelectors([[".error.animated.bounceIn"]], targetPage, { timeout, visible: true });
+              const loginError = await targetPage.evaluate(el => el.textContent, element)
+              notify("Error recieved when trying to login: " + loginError.trim())
+
+              await browser.close();
+              return false;
+          }
         }
       }
       // We are logged in now. Check available dates from the API
