@@ -104,7 +104,7 @@ const MAX_DATE_PICKER_LOOKUP = 12 * 4;
     }
 
     async function log(msg) {
-      const currentDate = '[' + new Date().toLocaleString() + ']';
+      const currentDate = '[' + new Date().toLocaleString('en-US', { timeZone: "America/Los_Angeles" }) + ']';
       console.log(currentDate, msg);
     }
 
