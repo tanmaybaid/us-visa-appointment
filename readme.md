@@ -11,6 +11,7 @@ This might be able to used for other countries by finding the consular ids menti
     1. npm install puppeteer --save
     2. npm install minimist --save
     3. npm install axios --save
+    4. npm install user-agents --save
 3. Install Pushover Notifications app from App Store/Google Play if you would like to have push notifications when a date is found
 
 ## Usage

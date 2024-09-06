@@ -1,6 +1,7 @@
 const puppeteer = require('puppeteer');
 const parseArgs = require('minimist');
 const axios = require('axios');
+const UserAgent = require('user-agents');
 
 const MAX_DATE_PICKER_LOOKUP = 12 * 4;
 (async () => {
@@ -18,9 +19,6 @@ const MAX_DATE_PICKER_LOOKUP = 12 * 4;
     const webhook = args.w;
     const groupAppointment = args.g;
     const headless = !args.v;
-
-    // Only used for headless
-    const userAgent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36"
     //#endregion
 	
     //#region Helper functions
@@ -147,6 +145,7 @@ const MAX_DATE_PICKER_LOOKUP = 12 * 4;
       page.setDefaultTimeout(timeout);
       page.setDefaultNavigationTimeout(navigationTimeout);
       if (headless) {
+        const userAgent = new UserAgent({ deviceCategory: 'desktop' }).toString()
         page.setUserAgent(userAgent);
       }
 
